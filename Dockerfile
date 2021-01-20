@@ -51,6 +51,15 @@ RUN useradd --user-group --create-home --system --skel /dev/null --home-dir /app
 # Switch to the new home directory
 WORKDIR /app
 
+ENV BENEFITS_HOST=http://127.0.0.1:8081
+ENV CHANNELS_HOST=http://127.0.0.1:8082
+ENV FEES_HOST=http://127.0.0.1:8083
+ENV TARGETS_HOST=http://127.0.0.1:8084
+ENV DATABASE_HOST=db
+ENV DATABASE_NAME=vapor_database
+ENV DATABASE_USERNAME=vapor_username
+ENV DATABASE_PASSWORD=vapor_password
+
 # Copy built executable and any staged resources from builder
 COPY --from=build --chown=vapor:vapor /staging /app
 
@@ -58,7 +67,7 @@ COPY --from=build --chown=vapor:vapor /staging /app
 USER vapor:vapor
 
 # Let Docker bind to port 8082
-EXPOSE 8080
+EXPOSE 8082
 
 # Start the Vapor service when the image is run, default to listening on 8080 in production environment
 ENTRYPOINT ["./Run Channels"]
