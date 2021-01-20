@@ -11,11 +11,13 @@ let package = Package(
         .package(url: "https://github.com/vapor/vapor.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/fluent-postgres-driver.git", from: "2.0.0"),
+        .package(name: "BogusApp-Common-Models", url: "../../Common/BogusApp-Common-Models", .branch("master"))
     ],
     targets: [
         .target(
             name: "Channels",
             dependencies: [
+                .product(name: "BogusApp-Common-Models", package: "BogusApp-Common-Models"),
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentPostgresDriver", package: "fluent-postgres-driver"),
                 .product(name: "Vapor", package: "vapor"),

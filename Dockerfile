@@ -51,10 +51,10 @@ RUN useradd --user-group --create-home --system --skel /dev/null --home-dir /app
 # Switch to the new home directory
 WORKDIR /app
 
-ENV BENEFITS_HOST=http://127.0.0.1:8081
-ENV CHANNELS_HOST=http://127.0.0.1:8082
-ENV FEES_HOST=http://127.0.0.1:8083
-ENV TARGETS_HOST=http://127.0.0.1:8084
+ENV BENEFITS_HOST=http://bogusapp-microservices-benefits.local:8181
+ENV CHANNELS_HOST=http://bogusapp-microservices-channels.local:8182
+ENV FEES_HOST=http://bogusapp-microservices-fees.local:8183
+ENV TARGETS_HOST=http://bogusapp-microservices-targets.local:8184
 ENV DATABASE_HOST=db
 ENV DATABASE_NAME=vapor_database
 ENV DATABASE_USERNAME=vapor_username
@@ -66,9 +66,9 @@ COPY --from=build --chown=vapor:vapor /staging /app
 # Ensure all further commands run as the vapor user
 USER vapor:vapor
 
-# Let Docker bind to port 8082
-EXPOSE 8082
+# Let Docker bind to port 8182
+EXPOSE 8182
 
-# Start the Vapor service when the image is run, default to listening on 8080 in production environment
+# Start the Vapor service when the image is run, default to listening on 8180 in production environment
 ENTRYPOINT ["./Run Channels"]
-CMD ["serve", "--env", "production", "--hostname", "0.0.0.0", "--port", "8082"]
+CMD ["serve", "--env", "production", "--hostname", "0.0.0.0", "--port", "8182"]
