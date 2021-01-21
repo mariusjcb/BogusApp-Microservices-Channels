@@ -26,7 +26,7 @@ struct ChannelsController: RouteCollection {
             .mapEachCompact { (query.isEmpty || query.contains($0.id!)) ? $0 : nil }
             .flatMapEach(on: req.eventLoop) { channel in
                 return channel.plans
-                    .map { BenefitsApi.fetchBenefitsByIds($0.benefitIds, client: req.client) } // Fetch benefits to replace benefitIds from db entity
+                    .map { BenefitsApi.fetchBenefitsByIds($0.benefitIds, client: req.client) } // Fetch benefits from microservice to replace benefitIds in db entry
                     .flatten(on: req.eventLoop)
                     .map { $0.reduce([], +) } // Reduce [[Benefit]] to [Benefit] for channel conversion
                     .map { channel.convert(linking: $0) }
