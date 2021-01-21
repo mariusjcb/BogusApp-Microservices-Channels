@@ -6,8 +6,7 @@ struct CreateChannels: Migration {
         return database.schema("channels")
             .id()
             .field("name", .string, .required)
-            .field("type", .json, .required)
-            .unique(on: "name", "type")
+            .unique(on: "name")
             .create()
     }
 

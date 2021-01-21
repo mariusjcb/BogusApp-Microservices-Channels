@@ -11,26 +11,24 @@ final class ChannelEntity: Model, Content {
     @Field(key: "name")
     var name: String
     
-    @Field(key: "type")
-    var type: BenefitType
+    @Children(for: \.$channel)
+    var plans: [PlanEntity]
 
     init() { }
     
-    init(_ benefit: Benefit) {
-        self.id = benefit.id
-        self.name = benefit.name
-        self.type = benefit.type
+    init(_ channel: BogusApp_Common_Models.Channel) {
+        self.id = channel.id
+        self.name = channel.name
     }
 
-    init(id: UUID, name: String, type: BenefitType) {
+    init(id: UUID, name: String) {
         self.id = id
         self.name = name
-        self.type = type
     }
     
-    func convert() -> Benefit {
-        .init(id: id ?? UUID(), name: name, type: type)
+    func convert(linking benefits: [Benefit]) -> BogusApp_Common_Models.Channel {
+        BogusApp_Common_Models.Channel(id: id ?? UUID(), name: name, plans: $plans.wrappedValue.map { $0.convert(linking: benefits) })
     }
 }
 
-extension Channel: Content { }
+extension BogusApp_Common_Models.Channel: Content { }
