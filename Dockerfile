@@ -58,7 +58,6 @@ ENV DATABASE_HOST=db
 ENV DATABASE_NAME=vapor_database
 ENV DATABASE_USERNAME=vapor_username
 ENV DATABASE_PASSWORD=vapor_password
-ENV DATABASE_PORT=5632
 
 # Copy built executable and any staged resources from builder
 COPY --from=build --chown=vapor:vapor /staging /app
