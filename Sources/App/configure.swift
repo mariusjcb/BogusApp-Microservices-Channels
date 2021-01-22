@@ -18,7 +18,6 @@ public func configure(_ app: Application) throws {
     app.migrations.add(CreateChannels())
     app.migrations.add(CreatePlan())
     app.migrations.add(CreatePlanBenefitAssoc())
-    app.migrations.add(InsertDemoPlans(app: app))
     app.autoMigrate().whenSuccess {
         print("Migration done on Channels service...")
     }

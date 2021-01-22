@@ -17,10 +17,14 @@ final class PlanBenefitEntity: Model, Content {
     @Parent(key: "planId")
     var plan: PlanEntity
     
+    @Field(key: "createdAt")
+    var createdAt: Date
+    
     init() { }
     
     init(_ planId: PlanEntity.IDValue, _ benefitId: UUID) {
         self.planId = planId
         self.benefitId = benefitId
+        self.createdAt = Date()
     }
 }

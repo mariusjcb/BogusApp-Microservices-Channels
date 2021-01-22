@@ -13,7 +13,7 @@ final class ChannelEntity: Model, Content {
     
     @Children(for: \.$channel)
     var plans: [PlanEntity]
-
+    
     init() { }
     
     init(_ channel: BogusApp_Common_Models.Channel) {
@@ -27,7 +27,8 @@ final class ChannelEntity: Model, Content {
     }
     
     func convert(linking benefits: [Benefit]) -> BogusApp_Common_Models.Channel {
-        BogusApp_Common_Models.Channel(id: id ?? UUID(), name: name, plans: $plans.wrappedValue.map { $0.convert(linking: benefits) })
+        let benefits = benefits.orderedSet
+        return BogusApp_Common_Models.Channel(id: id ?? UUID(), name: name, plans: $plans.wrappedValue.map { $0.convert(linking: benefits) })
     }
 }
 

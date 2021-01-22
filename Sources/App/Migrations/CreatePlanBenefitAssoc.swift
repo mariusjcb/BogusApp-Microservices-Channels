@@ -8,6 +8,7 @@ struct CreatePlanBenefitAssoc: Migration {
             .id()
             .field("planId", .uuid, .required)
             .field("benefitId", .uuid, .required)
+            .field("createdAt", .datetime, .required)
             .unique(on: "planId", "benefitId")
             .create()
     }

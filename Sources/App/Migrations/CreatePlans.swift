@@ -9,6 +9,7 @@ struct CreatePlan: Migration {
             .field("channelId", .uuid, .required)
             .field("price", .double, .required)
             .field("type", .string, .required)
+            .field("createdAt", .datetime, .required)
             .unique(on: "channelId", "price", "type")
             .create()
     }

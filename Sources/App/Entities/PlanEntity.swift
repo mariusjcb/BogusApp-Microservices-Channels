@@ -23,6 +23,9 @@ final class PlanEntity: Model, Content {
     @Children(for: \.$plan)
     var benefits: [PlanBenefitEntity]
     
+    @Field(key: "createdAt")
+    var createdAt: Date
+        
     var benefitIds: [UUID] { $benefits.wrappedValue.map { $0.benefitId } }
 
     init() { }
@@ -32,6 +35,7 @@ final class PlanEntity: Model, Content {
         self.price = plan.price
         self.type = plan.type
         self.channelId = channelId
+        self.createdAt = Date()
     }
 
     init(id: UUID, channelId: ChannelEntity.IDValue, price: Double, type: PlanType) {
@@ -39,10 +43,12 @@ final class PlanEntity: Model, Content {
         self.price = price
         self.type = type
         self.channelId = channelId
+        self.createdAt = Date()
     }
     
     func convert(linking benefits: [Benefit]) -> Plan {
-        .init(id: id ?? UUID(), price: price, benefits: benefits.filter { benefitIds.contains($0.id) }, type: type)
+        let benefits = benefits.orderedSet
+        return .init(id: id ?? UUID(), price: price, benefits: benefits.filter { benefitIds.contains($0.id) }, type: type)
     }
 }
 
