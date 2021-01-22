@@ -54,7 +54,7 @@ WORKDIR /app
 ENV BENEFITS_HOST=http://bogusapp-microservices-benefits.local:8181
 ENV CHANNELS_HOST=http://bogusapp-microservices-channels.local:8182
 ENV TARGETS_HOST=http://bogusapp-microservices-targets.local:8184
-ENV DATABASE_HOST=db
+ENV DATABASE_HOST=db-channels
 ENV DATABASE_NAME=vapor_database
 ENV DATABASE_USERNAME=vapor_username
 ENV DATABASE_PASSWORD=vapor_password
